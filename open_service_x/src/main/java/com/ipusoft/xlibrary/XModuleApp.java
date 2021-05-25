@@ -2,15 +2,12 @@ package com.ipusoft.xlibrary;
 
 import com.ipusoft.context.IpuSoftSDK;
 import com.ipusoft.context.bean.IAuthInfo;
-import com.ipusoft.xlibrary.bean.IToken;
+import com.ipusoft.context.utils.StringUtils;
 import com.ipusoft.xlibrary.http.AuthHttp;
-import com.ipusoft.xlibrary.utils.XStringUtils;
 import com.tencent.mmkv.MMKV;
 
 import java.security.MessageDigest;
 import java.util.Date;
-
-import io.reactivex.rxjava3.core.Observer;
 
 /**
  * author : GWFan
@@ -45,13 +42,6 @@ public class XModuleApp extends IpuSoftSDK {
         AuthHttp.checkIdentity(authCode);
     }
 
-    public static void initXModule(String key, String secret, String username, Observer<IToken> observer) {
-        initMMKV();
-        String sign = getSign(key, secret, username);
-        authCode = getAuth(key, username, sign);
-        AuthHttp.checkIdentity(authCode, observer);
-    }
-
     /**
      * 该方法通过反射调用
      *
@@ -60,17 +50,8 @@ public class XModuleApp extends IpuSoftSDK {
     public static void initXModule(IAuthInfo iAuthInfo) {
         if (iAuthInfo != null) {
             String key = iAuthInfo.getKey(), secret = iAuthInfo.getSecret(), username = iAuthInfo.getUsername();
-            if (XStringUtils.isNotEmpty(key) && XStringUtils.isNotEmpty(secret) && XStringUtils.isNotEmpty(username)) {
+            if (StringUtils.isNotEmpty(key) && StringUtils.isNotEmpty(secret) && StringUtils.isNotEmpty(username)) {
                 initXModule(key, secret, username);
-            }
-        }
-    }
-
-    public static void initXModule(IAuthInfo iAuthInfo, Observer<IToken> observer) {
-        if (iAuthInfo != null) {
-            String key = iAuthInfo.getKey(), secret = iAuthInfo.getSecret(), username = iAuthInfo.getUsername();
-            if (XStringUtils.isNotEmpty(key) && XStringUtils.isNotEmpty(secret) && XStringUtils.isNotEmpty(username)) {
-                initXModule(key, secret, username, observer);
             }
         }
     }
@@ -93,7 +74,7 @@ public class XModuleApp extends IpuSoftSDK {
     private static String getAuth(String key, String username, String sign) {
         String str = ("dev=SDK&key=" + key + "&ts=" + getSecondTimestamp(new Date())
                 + "&username=" + username + "&sign=" + sign);
-        return XStringUtils.base64Encode2String(str.getBytes());
+        return StringUtils.base64Encode2String(str.getBytes());
     }
 
     private static int getSecondTimestamp(Date date) {

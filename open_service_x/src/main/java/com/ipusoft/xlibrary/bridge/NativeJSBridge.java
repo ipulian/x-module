@@ -8,8 +8,6 @@ package com.ipusoft.xlibrary.bridge;
 
 public interface NativeJSBridge {
 
-    void title(String title);
-
     void call(String phone);
 
     void authorize();

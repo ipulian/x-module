@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ipusoft.xlibrary">
 
-    <application>
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application android:usesCleartextTraffic="true">
         <activity android:name=".view.IpuWebViewActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />

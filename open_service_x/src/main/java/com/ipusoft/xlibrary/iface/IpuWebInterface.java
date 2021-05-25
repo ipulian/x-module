@@ -21,11 +21,4 @@ public class IpuWebInterface {
     public void call(String phone) {
         bridge.call(phone);
     }
-
-    @JavascriptInterface
-    public void title(String title) {
-        bridge.title(title);
-    }
-
-
 }

@@ -2,11 +2,13 @@ package com.ipusoft.xlibrary.http;
 
 import android.util.Log;
 
+import com.ipusoft.context.base.IObserver;
+import com.ipusoft.context.utils.StringUtils;
 import com.ipusoft.xlibrary.XModuleApp;
 import com.ipusoft.xlibrary.bean.VirtualNumber;
+import com.ipusoft.xlibrary.constant.Constant;
 import com.ipusoft.xlibrary.iface.QueryXNumberListener;
 import com.ipusoft.xlibrary.module.XService;
-import com.ipusoft.xlibrary.utils.XStringUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -15,7 +17,6 @@ import java.util.Map;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.Disposable;
 
 /**
  * author : GWFan
@@ -24,7 +25,6 @@ import io.reactivex.rxjava3.disposables.Disposable;
  */
 
 public class XPhoneHttp {
-    private static final String TAG = "XPhoneHttp";
     private static final String TOKEN = "token";
     private static final String PHONE = "phone";
 
@@ -40,12 +40,7 @@ public class XPhoneHttp {
 
     public static void queryXPhone(String phone, QueryXNumberListener listener) throws Exception {
         Map<String, Object> params = checkToken(phone);
-        XService.Companion.callPhone(params, new Observer<VirtualNumber>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {
-
-            }
-
+        XService.Companion.callPhone(params, new IObserver<VirtualNumber>() {
             @Override
             public void onNext(@NotNull VirtualNumber result) {
                 if (listener != null) {
@@ -55,12 +50,7 @@ public class XPhoneHttp {
 
             @Override
             public void onError(@NonNull Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
+                Log.d(Constant.TAG, "XPhoneHttp->onError: " + e.toString());
             }
         });
     }
@@ -74,8 +64,8 @@ public class XPhoneHttp {
      */
     private static Map<String, Object> checkToken(String phone) throws Exception {
         String token = XModuleApp.token;
-        if (XStringUtils.isEmpty(token)) {
-            Log.d(TAG, "checkToken: token认证失败,请尝试重新初始化SDK");
+        if (StringUtils.isEmpty(token)) {
+            Log.d(Constant.TAG, "checkToken: token认证失败,请尝试重新初始化SDK");
             throw new Exception("token认证失败,请尝试重新初始化SDK");
         }
         HashMap<String, Object> map = new HashMap<>();
