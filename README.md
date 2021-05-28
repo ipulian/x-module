@@ -11,7 +11,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'com.github.ipulian:x-module:latest-version'
+    implementation 'com.github.ipulian:x-module:latest-version'//使用时把该版本替换成最新release版本
 }
 ```
 在AndroidManifest.xml中注册需要的权限
