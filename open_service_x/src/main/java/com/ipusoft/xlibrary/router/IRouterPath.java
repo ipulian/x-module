@@ -8,5 +8,5 @@ package com.ipusoft.xlibrary.router;
 
 public class IRouterPath {
 
-    public static final String ACTION_WEB_VIEW_ACTIVITY = "com.ipusoft.xlibrary.view.IpuWebViewActivity";
+    public static final String ACTION_WEB_VIEW_ACTIVITY = "/xlibrary/IpuWebViewActivity";
 }

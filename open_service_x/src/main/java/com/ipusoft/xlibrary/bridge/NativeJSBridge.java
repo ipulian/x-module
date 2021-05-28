@@ -9,8 +9,6 @@ package com.ipusoft.xlibrary.bridge;
 public interface NativeJSBridge {
 
     void call(String phone);
-
-    void authorize();
     
     void goBack();
 }

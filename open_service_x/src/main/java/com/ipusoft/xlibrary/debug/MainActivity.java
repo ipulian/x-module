@@ -76,6 +76,7 @@ public class MainActivity extends BaseActivity {
             Log.d(TAG, "onDial: 号码不能为空");
             return;
         }
+
         XPhoneHttp.queryXPhone(string, bindingInfo -> {
             int code = bindingInfo.getCode();
             if (HttpStatus.CODE_SUCCESS == code) {
@@ -83,6 +84,8 @@ public class MainActivity extends BaseActivity {
                 if (data != null) {
                     String number = data.getNumber();
                     PhoneUtils.callPhone(number);
+                } else {
+                    Toast.makeText(IpuSoftSDK.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 Toast.makeText(IpuSoftSDK.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
