@@ -70,8 +70,10 @@ XPhoneHttp.queryXPhone(string, new Observer<BindingInfo>() {
 ```java
       startActivity(new Intent(this, IpuWebViewActivity.class));
 ```
-
-
+## ProGuard rules
+```pro
+-keep class com.ipusoft.xlibrary.** { *;}
+```
 
 
 
