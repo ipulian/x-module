@@ -51,8 +51,8 @@ public class IpuWebViewActivity extends BaseActivity implements NativeJSBridge {
         String temp = "https://presaas.51lianlian.cn/h5/container.html?authCode="
                 + IpuSoftSDK.getAuthCode() + "&type=SDK";
         Log.d(TAG, "initUI: ---" + temp);
-        webView.loadUrl(URL);
-        authorize();
+        webView.loadUrl(temp);
+        // authorize();
     }
 
     @Override
