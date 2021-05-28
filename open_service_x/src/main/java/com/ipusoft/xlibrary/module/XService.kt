@@ -1,10 +1,8 @@
 package com.ipusoft.xlibrary.module
 
-import com.ipusoft.context.http.OpenRetrofitManager
+import com.ipusoft.context.http.manager.OpenRetrofitManager
 import com.ipusoft.xlibrary.api.XAPIService
-import com.ipusoft.xlibrary.bean.IAuthCode
-import com.ipusoft.xlibrary.bean.IToken
-import com.ipusoft.xlibrary.bean.VirtualNumber
+import com.ipusoft.xlibrary.bean.BindingInfo
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -17,35 +15,13 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 class XService {
     companion object {
-
-        /**
-         * 查询AuthCode
-         */
-        fun getAuthCode(auth: String, observer: Observer<IAuthCode>) {
-            OpenRetrofitManager.getInstance().retrofit.create(XAPIService::class.java)
-                    .getAuthCode(auth)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(observer)
-        }
-
-        /**
-         * 查询Token
-         */
-        fun getAuthCodeInfo(params: Map<String, Any>, observer: Observer<IToken>) {
-            OpenRetrofitManager.getInstance().retrofit.create(XAPIService::class.java)
-                    .getAuthCodeInfo(params)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(observer)
-        }
-
         /**
          * 取号外呼
          */
-        fun callPhone(params: Map<String, Any>, observer: Observer<VirtualNumber>) {
+        fun callPhone(apiKey: String, sign: String,
+                      params: Map<String, Any>, observer: Observer<BindingInfo>) {
             OpenRetrofitManager.getInstance().retrofit.create(XAPIService::class.java)
-                    .callPhone(OpenRetrofitManager.getInstance().getRequestBody(params))
+                    .callPhone(apiKey, sign, OpenRetrofitManager.getInstance().getRequestBody(params))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer)

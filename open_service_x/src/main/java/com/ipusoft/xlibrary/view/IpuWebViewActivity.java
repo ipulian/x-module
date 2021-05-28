@@ -14,7 +14,6 @@ import com.ipusoft.context.IpuSoftSDK;
 import com.ipusoft.context.utils.GsonUtils;
 import com.ipusoft.context.utils.StringUtils;
 import com.ipusoft.xlibrary.R;
-import com.ipusoft.xlibrary.XModuleApp;
 import com.ipusoft.xlibrary.bridge.NativeJSBridge;
 import com.ipusoft.xlibrary.databinding.XActivityIpuWebViewBinding;
 import com.ipusoft.xlibrary.iface.IpuWebInterface;
@@ -30,7 +29,7 @@ public class IpuWebViewActivity extends BaseActivity implements NativeJSBridge {
     private static final String TAG = "IpuWebViewActivity";
     private XActivityIpuWebViewBinding binding;
     private WebView webView;
-    private static final String URL = "http://192.168.0.64:8086/mui/container.html";
+    private static final String URL = "https://presaas.51lianlian.cn/h5/container.html";
 
     @Override
     protected void initViewModel() {
@@ -49,6 +48,9 @@ public class IpuWebViewActivity extends BaseActivity implements NativeJSBridge {
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         webView.addJavascriptInterface(new IpuWebInterface(this), "android");
+        String temp = "https://presaas.51lianlian.cn/h5/container.html?authCode="
+                + IpuSoftSDK.getAuthCode() + "&type=SDK";
+        Log.d(TAG, "initUI: ---" + temp);
         webView.loadUrl(URL);
         authorize();
     }
@@ -71,17 +73,23 @@ public class IpuWebViewActivity extends BaseActivity implements NativeJSBridge {
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public void authorize() {
-        String authCode = XModuleApp.getAuthCode();
+        String authCode = IpuSoftSDK.getAuthCode();
         if (StringUtils.isEmpty(authCode)) {
             Log.d(TAG, "authorize: 认证失败");
             Toast.makeText(IpuSoftSDK.getAppContext(), "认证失败", Toast.LENGTH_SHORT).show();
             return;
         }
+        Log.d(TAG, "authorize: -----》" + authCode);
         new Handler().postDelayed(() -> {
             webView.evaluateJavascript("javascript:authorize(" + GsonUtils.toJson(authCode)
                     + ","
                     + GsonUtils.toJson("SDK") + ") ", value -> {
             });
         }, 1000);
+    }
+
+    @Override
+    public void goBack() {
+        finish();
     }
 }

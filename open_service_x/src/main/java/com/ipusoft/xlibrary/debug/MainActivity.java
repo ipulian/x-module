@@ -1,7 +1,4 @@
-package com.ipusoft.demo;
-
-import androidx.core.app.ActivityCompat;
-import androidx.databinding.DataBindingUtil;
+package com.ipusoft.xlibrary.debug;
 
 import android.Manifest;
 import android.content.Intent;
@@ -10,11 +7,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.databinding.DataBindingUtil;
+
 import com.ipusoft.context.BaseActivity;
 import com.ipusoft.context.IpuSoftSDK;
 import com.ipusoft.context.utils.StringUtils;
-import com.ipusoft.demo.databinding.ActivityMainBinding;
+import com.ipusoft.xlibrary.R;
+import com.ipusoft.xlibrary.bean.BindingInfo;
 import com.ipusoft.xlibrary.constant.HttpStatus;
+import com.ipusoft.xlibrary.databinding.ActivityMainBinding;
 import com.ipusoft.xlibrary.http.XPhoneHttp;
 import com.ipusoft.xlibrary.utils.PhoneUtils;
 import com.ipusoft.xlibrary.view.IpuWebViewActivity;
@@ -77,8 +79,11 @@ public class MainActivity extends BaseActivity {
         XPhoneHttp.queryXPhone(string, bindingInfo -> {
             int code = bindingInfo.getCode();
             if (HttpStatus.CODE_SUCCESS == code) {
-                String number = bindingInfo.getNumber();
-                PhoneUtils.callPhone(number);
+                BindingInfo.BindingData data = bindingInfo.getData();
+                if (data != null) {
+                    String number = data.getNumber();
+                    PhoneUtils.callPhone(number);
+                }
             } else {
                 Toast.makeText(IpuSoftSDK.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
             }

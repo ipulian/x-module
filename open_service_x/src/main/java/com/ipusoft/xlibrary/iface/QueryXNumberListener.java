@@ -1,6 +1,6 @@
 package com.ipusoft.xlibrary.iface;
 
-import com.ipusoft.xlibrary.bean.VirtualNumber;
+import com.ipusoft.xlibrary.bean.BindingInfo;
 
 /**
  * author : GWFan
@@ -10,5 +10,5 @@ import com.ipusoft.xlibrary.bean.VirtualNumber;
 
 public interface QueryXNumberListener {
 
-    void onQueryListener(VirtualNumber virtualNumber);
+    void onQueryListener(BindingInfo bindingInfo);
 }

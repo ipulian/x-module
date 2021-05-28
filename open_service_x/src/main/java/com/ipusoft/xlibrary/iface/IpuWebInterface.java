@@ -21,4 +21,9 @@ public class IpuWebInterface {
     public void call(String phone) {
         bridge.call(phone);
     }
+
+    @JavascriptInterface
+    public void goBack() {
+        bridge.goBack();
+    }
 }

@@ -11,4 +11,6 @@ public interface NativeJSBridge {
     void call(String phone);
 
     void authorize();
+    
+    void goBack();
 }

@@ -1,4 +1,10 @@
-plugins { id 'com.android.library' }
+def isApp = true
+
+if (isApp) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -12,6 +18,9 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
+        if (isApp) {
+            applicationId "com.ipusoft.xlibrary"
+        }
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -24,7 +33,6 @@ android {
         }
     }
 
-
     buildTypes {
         release {
             minifyEnabled false
@@ -34,6 +42,17 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            if (isApp) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java.srcDir 'src/main/debug'
+            } else {
+                manifest.srcFile 'src/main/manifest/AndroidManifest.xml'
+            }
+        }
     }
 
     buildFeatures { dataBinding = true }
@@ -46,7 +65,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
-    implementation "com.github.ipulian:ipusdk:1.6.10"
+    if (isApp) {
+        implementation project(":context:context")
+    } else {
+        implementation "com.github.ipulian:ipusdk:1.6.13.5"
+    }
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }
