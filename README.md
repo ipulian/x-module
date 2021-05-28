@@ -20,7 +20,7 @@ dependencies {
     <uses-permission android:name="android.permission.CALL_PHONE" />
 ```
 ## Usage
-- 1. 绑定小号并外呼
+- 1. 绑定小号并外呼(需要先申请android.permission.CALL_PHONE权限)
 ```java
   //参数 phone 为联系人的真实号码, bindingInfo 为返回的绑定信息(详细说明，参考BindingInfo.class)
    XPhoneHttp.queryXPhone(phone, bindingInfo -> {
@@ -64,8 +64,12 @@ XPhoneHttp.queryXPhone(string, new Observer<BindingInfo>() {
             }
         });
 ````
-- 2. 获取通话状态,可以参考 IpuSDK(https://github.com/ipulian/ipusdk)中的说明。
-- 3. 
+- 2. 获取通话状态,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
+- 3. 展示通话弹屏,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
+- 4. 查看通话记录，使用拨号键盘，查看电话统计，客户统计，综合排名等功能，可以跳转到内部的H5页面
+```java
+      startActivity(new Intent(this, IpuWebViewActivity.class));
+```
 
 
 
