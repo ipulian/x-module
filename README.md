@@ -20,7 +20,7 @@ dependencies {
     <uses-permission android:name="android.permission.CALL_PHONE" />
 ```
 ## Usage
-1. 绑定小号并外呼
+- 1. 绑定小号并外呼
 ```java
   //参数 phone 为联系人的真实号码, bindingInfo 为返回的绑定信息(详细说明，参考BindingInfo.class)
    XPhoneHttp.queryXPhone(phone, bindingInfo -> {
@@ -39,6 +39,34 @@ dependencies {
             }
    })
 ````
+或者通过RxJava3 的Observer 返回bindingInfo
+
+```java
+XPhoneHttp.queryXPhone(string, new Observer<BindingInfo>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+                
+            }
+
+            @Override
+            public void onNext(@NonNull BindingInfo bindingInfo) {
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+````
+- 2. 获取通话状态,可以参考 IpuSDK(https://github.com/ipulian/ipusdk)中的说明。
+- 3. 
+
 
 
 
