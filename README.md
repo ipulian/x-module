@@ -68,7 +68,7 @@ XPhoneHttp.queryXPhone(string, new Observer<BindingInfo>() {
 - 3. 展示通话弹屏,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
 - 4. 查看通话记录，使用拨号键盘，查看电话统计，客户统计，综合排名等功能，可以跳转到内部的H5页面
 ```java
-      startActivity(new Intent(this, IpuWebViewActivity.class));
+startActivity(new Intent(this, IpuWebViewActivity.class));
 ```
 ## ProGuard rules
 ```pro
