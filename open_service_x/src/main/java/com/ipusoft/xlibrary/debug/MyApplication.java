@@ -21,5 +21,10 @@ public class MyApplication extends Application {
         String secret = "90237f5970f805250f07fef18fff45cb";
         String username = "17047151254";
         IpuSoftSDK.init(this, new IAuthInfo(key, secret, username));
+
+        /**
+         * 注册通话状态的listener
+         */
+        IpuSoftSDK.setOnPhoneStatusChangedListener(new OnPhoneStatusChangedListenerImpl());
     }
 }

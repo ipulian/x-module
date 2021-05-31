@@ -7,7 +7,7 @@
 
     <application android:usesCleartextTraffic="true">
         <activity android:name="com.ipusoft.xlibrary.debug.MainActivity" />
-        <activity android:name=".view.IpuWebViewActivity" />
+        <activity android:name="com.ipusoft.context.view.IpuWebViewActivity" />
     </application>
 
 </manifest>

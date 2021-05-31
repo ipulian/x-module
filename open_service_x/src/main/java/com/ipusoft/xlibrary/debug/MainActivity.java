@@ -12,14 +12,14 @@ import androidx.databinding.DataBindingUtil;
 
 import com.ipusoft.context.BaseActivity;
 import com.ipusoft.context.IpuSoftSDK;
+import com.ipusoft.context.manager.PhoneManager;
 import com.ipusoft.context.utils.StringUtils;
+import com.ipusoft.context.view.IpuWebViewActivity;
 import com.ipusoft.xlibrary.R;
 import com.ipusoft.xlibrary.bean.BindingInfo;
 import com.ipusoft.xlibrary.constant.HttpStatus;
 import com.ipusoft.xlibrary.databinding.ActivityMainBinding;
 import com.ipusoft.xlibrary.http.XPhoneHttp;
-import com.ipusoft.xlibrary.utils.PhoneUtils;
-import com.ipusoft.xlibrary.view.IpuWebViewActivity;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity {
                 BindingInfo.BindingData data = bindingInfo.getData();
                 if (data != null) {
                     String number = data.getNumber();
-                    PhoneUtils.callPhone(number);
+                    PhoneManager.callPhone(number);
                 } else {
                     Toast.makeText(IpuSoftSDK.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
                 }

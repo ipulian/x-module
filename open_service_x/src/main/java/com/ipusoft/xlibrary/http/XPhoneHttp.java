@@ -14,7 +14,7 @@ import com.ipusoft.context.utils.StringUtils;
 import com.ipusoft.xlibrary.bean.BindingInfo;
 import com.ipusoft.xlibrary.constant.Constant;
 import com.ipusoft.xlibrary.constant.HttpStatus;
-import com.ipusoft.xlibrary.iface.QueryXNumberListener;
+import com.ipusoft.xlibrary.listener.QueryXNumberListener;
 import com.ipusoft.xlibrary.module.XService;
 
 import org.jetbrains.annotations.NotNull;
@@ -63,7 +63,7 @@ public class XPhoneHttp {
      * @return
      */
     private static void checkToken(String phone, Observer<BindingInfo> observer) {
-        if (StringUtils.isEmpty(IpuSoftSDK.token)) {
+        if (StringUtils.isEmpty(IpuSoftSDK.getToken())) {
             Log.d(Constant.TAG, "checkToken: token认证失败,请尝试重新初始化SDK");
             IpuSoftSDK.reLogin(status -> {
                 if (OnSDKLoginListener.LoginStatus.SUCCESS == status) {
@@ -79,7 +79,7 @@ public class XPhoneHttp {
     }
 
     private static void checkToken(String phone, QueryXNumberListener listener) {
-        if (StringUtils.isEmpty(IpuSoftSDK.token)) {
+        if (StringUtils.isEmpty(IpuSoftSDK.getToken())) {
             Log.d(Constant.TAG, "checkToken: token认证失败,请尝试重新初始化SDK");
             IpuSoftSDK.reLogin(status -> {
                 if (OnSDKLoginListener.LoginStatus.SUCCESS == status) {
@@ -97,14 +97,14 @@ public class XPhoneHttp {
     private static Map<String, Object> getParams(String phone) {
         HashMap<String, Object> params = new HashMap<>();
         params.put("calledNo", phone);//被叫号码
-        params.put("ts", getSecondTimestamp(new Date()));//时间戳
+
         IAuthInfo authInfo = IpuSoftSDK.getAuthInfo();
         String username = "";
         if (authInfo != null) {
             username = authInfo.getUsername();
         }
         params.put("callerId", username);//坐席编号
-
+        params.put("ts", getSecondTimestamp(new Date()));//时间戳
         Log.d(TAG, "getParams: ----->" + GsonUtils.toJson(params));
         return params;
     }
@@ -112,8 +112,9 @@ public class XPhoneHttp {
     private static void callPhone(String phone, Observer<BindingInfo> observer) {
         IAuthInfo authInfo = IpuSoftSDK.getAuthInfo();
         if (authInfo != null) {
+            Map<String, Object> params = getParams(phone);
             XService.Companion.callPhone(authInfo.getKey(),
-                    getSign(GsonUtils.toJson(getParams(phone))), getParams(phone), observer);
+                    getSign(GsonUtils.toJson(params)), params, observer);
         } else {
             Toast.makeText(IActivityLifecycle.getCurrentActivity(), "认证失败", Toast.LENGTH_SHORT).show();
         }
@@ -122,8 +123,9 @@ public class XPhoneHttp {
     private static void callPhone(String phone, QueryXNumberListener listener) {
         IAuthInfo authInfo = IpuSoftSDK.getAuthInfo();
         if (authInfo != null) {
+            Map<String, Object> params = getParams(phone);
             XService.Companion.callPhone(authInfo.getKey(),
-                    getSign(GsonUtils.toJson(getParams(phone))), getParams(phone), new IObserver<BindingInfo>() {
+                    getSign(GsonUtils.toJson(params)), params, new IObserver<BindingInfo>() {
                         @Override
                         public void onNext(@NotNull BindingInfo result) {
                             if (listener != null) {
@@ -156,6 +158,11 @@ public class XPhoneHttp {
     }
 
     private static String getSign(String paramsJson) {
+
         return MD5Utils.getMD5(paramsJson + IpuSoftSDK.getAuthInfo().getSecret());
+    }
+
+    public static void main(String[] args) {
+        System.out.println(MD5Utils.getMD5("321"));
     }
 }

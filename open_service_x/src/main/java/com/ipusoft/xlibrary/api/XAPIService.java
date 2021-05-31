@@ -1,7 +1,7 @@
 package com.ipusoft.xlibrary.api;
 
+import com.ipusoft.context.http.HttpConstant;
 import com.ipusoft.xlibrary.bean.BindingInfo;
-import com.ipusoft.xlibrary.constant.HttpConstant;
 
 import io.reactivex.rxjava3.core.Observable;
 import okhttp3.RequestBody;
@@ -24,7 +24,7 @@ public interface XAPIService {
      * @param requestBody
      * @return
      */
-    @Headers({HttpConstant.WITH_OPEN_URL})
+    @Headers({HttpConstant.OPEN_URL_PRE})
     @POST("/sdk/call/callPhone")
     Observable<BindingInfo> callPhone(@Header("api_key") String apiKey, @Header("sign") String sign,
                                       @Body RequestBody requestBody);
