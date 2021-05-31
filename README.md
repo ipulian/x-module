@@ -42,7 +42,7 @@ dependencies {
 或者通过RxJava3 的Observer 返回bindingInfo
 
 ```java
-XPhoneHttp.queryXPhone(string, new Observer<BindingInfo>() {
+XPhoneHttp.queryXPhone(phone, new Observer<BindingInfo>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
                 
@@ -64,6 +64,10 @@ XPhoneHttp.queryXPhone(string, new Observer<BindingInfo>() {
             }
         });
 ````
+或者由SDK处理返回结果，正常情况下直接外呼，否则Toast提示相关信息
+```java
+ XPhoneHttp.queryXPhone(phone);
+```
 - 2.获取通话状态,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
 - 3.展示通话弹屏,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
 ## ProGuard rules
