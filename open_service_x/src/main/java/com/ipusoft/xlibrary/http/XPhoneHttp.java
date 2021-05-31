@@ -8,6 +8,7 @@ import com.ipusoft.context.IpuSoftSDK;
 import com.ipusoft.context.OnSDKLoginListener;
 import com.ipusoft.context.base.IObserver;
 import com.ipusoft.context.bean.IAuthInfo;
+import com.ipusoft.context.manager.PhoneManager;
 import com.ipusoft.context.utils.GsonUtils;
 import com.ipusoft.context.utils.MD5Utils;
 import com.ipusoft.context.utils.StringUtils;
@@ -56,12 +57,37 @@ public class XPhoneHttp {
         checkToken(phone, listener);
     }
 
+    public static void queryXPhone(String phone) {
+        if (StringUtils.isEmpty(phone)) {
+            Toast.makeText(IpuSoftSDK.getAppContext(), "号码不能为空", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        checkToken(phone);
+    }
+
     /**
      * 验证Token
      *
      * @param phone
      * @return
      */
+
+    private static void checkToken(String phone) {
+        if (StringUtils.isEmpty(IpuSoftSDK.getToken())) {
+            Log.d(Constant.TAG, "checkToken: token认证失败,请尝试重新初始化SDK");
+            IpuSoftSDK.reLogin(status -> {
+                if (OnSDKLoginListener.LoginStatus.SUCCESS == status) {
+                    callPhone(phone);
+                } else {
+                    Toast.makeText(IpuSoftSDK.getAppContext(), "SDK初始化失败", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "checkToken: reLogin失败");
+                }
+            });
+        } else {
+            callPhone(phone);
+        }
+    }
+
     private static void checkToken(String phone, Observer<BindingInfo> observer) {
         if (StringUtils.isEmpty(IpuSoftSDK.getToken())) {
             Log.d(Constant.TAG, "checkToken: token认证失败,请尝试重新初始化SDK");
@@ -119,6 +145,44 @@ public class XPhoneHttp {
             Toast.makeText(IActivityLifecycle.getCurrentActivity(), "认证失败", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private static void callPhone(String phone) {
+        IAuthInfo authInfo = IpuSoftSDK.getAuthInfo();
+        if (authInfo != null) {
+            Map<String, Object> params = getParams(phone);
+            XService.Companion.callPhone(authInfo.getKey(),
+                    getSign(GsonUtils.toJson(params)), params, new IObserver<BindingInfo>() {
+                        @Override
+                        public void onNext(@NotNull BindingInfo bindingInfo) {
+                            int code = bindingInfo.getCode();
+                            if (HttpStatus.CODE_SUCCESS == code) {
+                                BindingInfo.BindingData data = bindingInfo.getData();
+                                if (data != null) {
+                                    String number = data.getNumber();
+                                    if (StringUtils.isNotEmpty(number)) {
+                                        PhoneManager.callPhone(number);
+                                    } else {
+                                        Toast.makeText(IpuSoftSDK.getAppContext(), "号码为空", Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(IpuSoftSDK.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(IpuSoftSDK.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onError(@NonNull Throwable e) {
+                            Log.d(Constant.TAG, "XPhoneHttp->onError: " + e.toString());
+                            Toast.makeText(IpuSoftSDK.getAppContext(), "拨号出错", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            Toast.makeText(IActivityLifecycle.getCurrentActivity(), "认证失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     private static void callPhone(String phone, QueryXNumberListener listener) {
         IAuthInfo authInfo = IpuSoftSDK.getAuthInfo();
