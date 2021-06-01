@@ -6,29 +6,101 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_phone"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="50dp"
-            android:background="@color/black10"
-            android:hint="输入电话号码" />
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:onClick="onDial"
-            android:text="拨号" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onLoad"
-            android:text="加载H5页面" />
+                <EditText
+                    android:id="@+id/et_key"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@color/black10"
+                    android:hint="key"
+                    android:paddingStart="@dimen/dp_20" />
+
+                <EditText
+                    android:id="@+id/et_secret"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/black10"
+                    android:hint="secret"
+                    android:paddingStart="@dimen/dp_20" />
+
+                <EditText
+                    android:id="@+id/et_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/black10"
+                    android:hint="username"
+                    android:paddingStart="@dimen/dp_20" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:onClick="onlogin"
+                    android:text="重新登陆" />
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@color/black10"
+                    android:hint="输入电话号码"
+                    android:paddingStart="@dimen/dp_20" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:onClick="onDial"
+                    android:text="拨号" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onLoad"
+                    android:text="加载H5页面" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onSwitch"
+                    android:text="环境切换" />
+
+                <TextView
+                    android:id="@+id/tv_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text=""
+                    android:textSize="@dimen/sp_18" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="切换环境，输入参数，然后重新登陆"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 
 </layout>

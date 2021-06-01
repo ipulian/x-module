@@ -123,7 +123,6 @@ public class XPhoneHttp {
     private static Map<String, Object> getParams(String phone) {
         HashMap<String, Object> params = new HashMap<>();
         params.put("calledNo", phone);//被叫号码
-
         IAuthInfo authInfo = IpuSoftSDK.getAuthInfo();
         String username = "";
         if (authInfo != null) {
@@ -131,7 +130,6 @@ public class XPhoneHttp {
         }
         params.put("callerId", username);//坐席编号
         params.put("ts", getSecondTimestamp(new Date()));//时间戳
-        Log.d(TAG, "getParams: ----->" + GsonUtils.toJson(params));
         return params;
     }
 

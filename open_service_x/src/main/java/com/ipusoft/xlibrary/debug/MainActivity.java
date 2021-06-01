@@ -12,6 +12,8 @@ import androidx.databinding.DataBindingUtil;
 
 import com.ipusoft.context.BaseActivity;
 import com.ipusoft.context.IpuSoftSDK;
+import com.ipusoft.context.bean.IAuthInfo;
+import com.ipusoft.context.config.Env;
 import com.ipusoft.context.manager.PhoneManager;
 import com.ipusoft.context.utils.StringUtils;
 import com.ipusoft.context.view.IpuWebViewActivity;
@@ -24,6 +26,10 @@ import com.ipusoft.xlibrary.http.XPhoneHttp;
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
+
+    String key = "4571122846924808";
+    String secret = "90237f5970f805250f07fef18fff45cb";
+    String username = "17047151254";
 
     @Override
     protected void initViewModel() {
@@ -43,6 +49,14 @@ public class MainActivity extends BaseActivity {
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1024);
         }
+
+        binding.etKey.setText(key);
+        binding.etSecret.setText(secret);
+        binding.etUsername.setText(username);
+
+        binding.tvMsg.setText("当前运行环境：预发布");
+
+
     }
 
     @Override
@@ -91,5 +105,32 @@ public class MainActivity extends BaseActivity {
                 Toast.makeText(IpuSoftSDK.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void onSwitch(View view) {
+        if (MyApplication.env == Env.DEV) {
+            MyApplication.env = Env.PRO;
+            binding.tvMsg.setText("当前运行环境：正式");
+            binding.etKey.setText("");
+            binding.etSecret.setText("");
+            binding.etUsername.setText("");
+        } else {
+            MyApplication.env = Env.DEV;
+            binding.tvMsg.setText("当前运行环境：预发布");
+            binding.etKey.setText(key);
+            binding.etSecret.setText(secret);
+            binding.etUsername.setText(username);
+        }
+    }
+
+    public void onlogin(View view) {
+        String ke = binding.etKey.getText().toString();
+        String se = binding.etSecret.getText().toString();
+        String us = binding.etUsername.getText().toString();
+        if (StringUtils.isEmpty(ke) || StringUtils.isEmpty(se) || StringUtils.isEmpty(us)) {
+            Toast.makeText(this, "请输入", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        IpuSoftSDK.init(MyApplication.instance, MyApplication.env, new IAuthInfo(ke, se, us));
     }
 }

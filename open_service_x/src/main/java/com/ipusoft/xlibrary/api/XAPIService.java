@@ -24,7 +24,7 @@ public interface XAPIService {
      * @param requestBody
      * @return
      */
-    @Headers({HttpConstant.OPEN_URL_PRE})
+    @Headers({HttpConstant.OPEN_URL})
     @POST("/sdk/call/callPhone")
     Observable<BindingInfo> callPhone(@Header("api_key") String apiKey, @Header("sign") String sign,
                                       @Body RequestBody requestBody);
