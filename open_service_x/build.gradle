@@ -86,8 +86,8 @@ dependencies {
         implementation project(":context:context")
         // implementation "com.github.ipulian:ipusdk:1.6.15"
     } else {
-        implementation "com.github.ipulian:ipusdk:1.6.16"
-        //implementation project(":context:context")
+        //implementation "com.github.ipulian:ipusdk:1.6.16"
+        implementation project(":context:context")
     }
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'
 }
