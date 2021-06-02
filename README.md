@@ -68,8 +68,14 @@ XPhoneHttp.queryXPhone(phone, new Observer<BindingInfo>() {
 ```java
  XPhoneHttp.queryXPhone(phone);
 ```
-- 2.获取通话状态,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
-- 3.展示通话弹屏,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
+- 2.发送短信
+```java
+ XPhoneHttp.sendMsgByXPhone(phone,content);
+ OR
+  XPhoneHttp.sendMsgByXPhone(phone);
+```
+- 3.获取通话状态,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
+- 4.展示通话弹屏,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
 ## ProGuard rules
 ```pro
 -keep class com.ipusoft.xlibrary.** { *;}
