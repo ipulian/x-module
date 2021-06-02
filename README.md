@@ -72,7 +72,7 @@ XPhoneHttp.queryXPhone(phone, new Observer<BindingInfo>() {
 ```java
  XPhoneHttp.sendMsgByXPhone(phone,content);
  OR
-  XPhoneHttp.sendMsgByXPhone(phone);
+ XPhoneHttp.sendMsgByXPhone(phone);
 ```
 - 3.获取通话状态,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
 - 4.展示通话弹屏,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
