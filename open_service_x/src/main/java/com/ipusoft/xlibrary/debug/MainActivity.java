@@ -133,4 +133,14 @@ public class MainActivity extends BaseActivity {
         }
         IpuSoftSDK.init(MyApplication.instance, MyApplication.env, new IAuthInfo(ke, se, us));
     }
+
+    public void onsend(View view) {
+        String string = binding.etPhone.getText().toString();
+        if (StringUtils.isEmpty(string)) {
+            Toast.makeText(this, "号码不能为空", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "onDial: 号码不能为空");
+            return;
+        }
+        XPhoneHttp.sendMsgByXPhone(string, "123");
+    }
 }
