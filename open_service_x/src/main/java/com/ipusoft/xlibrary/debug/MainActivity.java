@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.ipusoft.context.BaseActivity;
 import com.ipusoft.context.IpuSoftSDK;
-import com.ipusoft.context.bean.IAuthInfo;
+import com.ipusoft.context.bean.AuthInfo;
 import com.ipusoft.context.config.Env;
 import com.ipusoft.context.manager.PhoneManager;
 import com.ipusoft.context.utils.StringUtils;
@@ -131,7 +131,7 @@ public class MainActivity extends BaseActivity {
             Toast.makeText(this, "请输入", Toast.LENGTH_SHORT).show();
             return;
         }
-        IpuSoftSDK.init(MyApplication.instance, MyApplication.env, new IAuthInfo(ke, se, us));
+        IpuSoftSDK.init(MyApplication.instance, MyApplication.env, new AuthInfo(ke, se, us));
     }
 
     public void onsend(View view) {

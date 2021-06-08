@@ -8,7 +8,7 @@ import com.ipusoft.context.IActivityLifecycle;
 import com.ipusoft.context.IpuSoftSDK;
 import com.ipusoft.context.OnSDKLoginListener;
 import com.ipusoft.context.base.IObserver;
-import com.ipusoft.context.bean.IAuthInfo;
+import com.ipusoft.context.bean.AuthInfo;
 import com.ipusoft.context.manager.PhoneManager;
 import com.ipusoft.context.utils.GsonUtils;
 import com.ipusoft.context.utils.MD5Utils;
@@ -158,7 +158,7 @@ public class XPhoneHttp {
     private static Map<String, Object> getParams(String phone) {
         HashMap<String, Object> params = new HashMap<>();
         params.put("calledNo", phone);//被叫号码
-        IAuthInfo authInfo = IpuSoftSDK.getAuthInfo();
+        AuthInfo authInfo = IpuSoftSDK.getAuthInfo();
         String username = "";
         if (authInfo != null) {
             username = authInfo.getUsername();
@@ -169,7 +169,7 @@ public class XPhoneHttp {
     }
 
     private static void callPhone(String phone, Observer<BindingInfo> observer) {
-        IAuthInfo authInfo = AppContext.getAuthInfo();
+        AuthInfo authInfo = AppContext.getAuthInfo();
         if (authInfo != null) {
             Map<String, Object> params = getParams(phone);
             XService.Companion.callPhone(authInfo.getKey(),
@@ -180,7 +180,7 @@ public class XPhoneHttp {
     }
 
     private static void callPhone(String phone) {
-        IAuthInfo authInfo = AppContext.getAuthInfo();
+        AuthInfo authInfo = AppContext.getAuthInfo();
         if (authInfo != null) {
             Map<String, Object> params = getParams(phone);
             XService.Companion.callPhone(authInfo.getKey(),
@@ -218,7 +218,7 @@ public class XPhoneHttp {
 
 
     private static void callPhone(String phone, String content) {
-        IAuthInfo authInfo = AppContext.getAuthInfo();
+        AuthInfo authInfo = AppContext.getAuthInfo();
         if (authInfo != null) {
             Map<String, Object> params = getParams(phone);
             XService.Companion.callPhone(authInfo.getKey(),
@@ -255,7 +255,7 @@ public class XPhoneHttp {
     }
 
     private static void callPhone(String phone, QueryXNumberListener listener) {
-        IAuthInfo authInfo = AppContext.getAuthInfo();
+        AuthInfo authInfo = AppContext.getAuthInfo();
         if (authInfo != null) {
             Map<String, Object> params = getParams(phone);
             XService.Companion.callPhone(authInfo.getKey(),
