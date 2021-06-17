@@ -1,4 +1,4 @@
-package com.ipusoft.xlibrary.debug;
+package com.ipusoft.xphone.debug;
 
 import android.Manifest;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
+import com.ipusoft.context.AppContext;
 import com.ipusoft.context.BaseActivity;
 import com.ipusoft.context.IpuSoftSDK;
 import com.ipusoft.context.bean.AuthInfo;
@@ -17,11 +18,11 @@ import com.ipusoft.context.config.Env;
 import com.ipusoft.context.manager.PhoneManager;
 import com.ipusoft.context.utils.StringUtils;
 import com.ipusoft.context.view.IpuWebViewActivity;
-import com.ipusoft.xlibrary.R;
-import com.ipusoft.xlibrary.bean.BindingInfo;
-import com.ipusoft.xlibrary.constant.HttpStatus;
-import com.ipusoft.xlibrary.databinding.ActivityMainBinding;
-import com.ipusoft.xlibrary.http.XPhoneHttp;
+import com.ipusoft.xphone.R;
+import com.ipusoft.xphone.bean.BindingInfo;
+import com.ipusoft.xphone.constant.HttpStatus;
+import com.ipusoft.xphone.databinding.ActivityMainBinding;
+import com.ipusoft.xphone.http.XPhoneHttp;
 
 public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
@@ -39,6 +40,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initData() {
     }
+
 
     /**
      * 申请拨号权限
@@ -99,23 +101,23 @@ public class MainActivity extends BaseActivity {
                     String number = data.getNumber();
                     PhoneManager.callPhone(number);
                 } else {
-                    Toast.makeText(IpuSoftSDK.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AppContext.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(IpuSoftSDK.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AppContext.getAppContext(), bindingInfo.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void onSwitch(View view) {
-        if (MyApplication.env == Env.DEV) {
-            MyApplication.env = Env.PRO;
+        if (StringUtils.equals(Env.OPEN_DEV, MyApplication.env)) {
+            MyApplication.env = Env.OPEN_PRO;
             binding.tvMsg.setText("当前运行环境：正式");
             binding.etKey.setText("");
             binding.etSecret.setText("");
             binding.etUsername.setText("");
         } else {
-            MyApplication.env = Env.DEV;
+            MyApplication.env = Env.OPEN_DEV;
             binding.tvMsg.setText("当前运行环境：预发布");
             binding.etKey.setText(key);
             binding.etSecret.setText(secret);

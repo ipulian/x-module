@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ipusoft.xlibrary">
+    package="com.ipusoft.xphone">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application android:usesCleartextTraffic="true">
-        <activity android:name="com.ipusoft.xlibrary.debug.MainActivity" />
+        <activity android:name="com.ipusoft.xphone.debug.MainActivity" />
         <activity android:name="com.ipusoft.context.view.IpuWebViewActivity" />
     </application>
 

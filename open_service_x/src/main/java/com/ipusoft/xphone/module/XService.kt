@@ -1,8 +1,8 @@
-package com.ipusoft.xlibrary.module
+package com.ipusoft.xphone.module
 
-import com.ipusoft.context.http.manager.OpenRetrofitManager
-import com.ipusoft.xlibrary.api.XAPIService
-import com.ipusoft.xlibrary.bean.BindingInfo
+import com.ipusoft.http.manager.RetrofitManager
+import com.ipusoft.xphone.api.XAPIService
+import com.ipusoft.xphone.bean.BindingInfo
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -20,8 +20,8 @@ class XService {
          */
         fun callPhone(apiKey: String, sign: String,
                       params: Map<String, Any>, observer: Observer<BindingInfo>) {
-            OpenRetrofitManager.getInstance().retrofit.create(XAPIService::class.java)
-                    .callPhone(apiKey, sign, OpenRetrofitManager.getInstance().getRequestBody(params))
+            RetrofitManager.getInstance().retrofit.create(XAPIService::class.java)
+                    .callPhone(apiKey, sign, RetrofitManager.getInstance().getRequestBody(params))
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(observer)

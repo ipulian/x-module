@@ -1,6 +1,6 @@
-package com.ipusoft.xlibrary.listener;
+package com.ipusoft.xphone.listener;
 
-import com.ipusoft.xlibrary.bean.BindingInfo;
+import com.ipusoft.xphone.bean.BindingInfo;
 
 /**
  * author : GWFan

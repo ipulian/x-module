@@ -1,4 +1,4 @@
-package com.ipusoft.xlibrary.constant;
+package com.ipusoft.xphone.constant;
 
 /**
  * author : GWFan

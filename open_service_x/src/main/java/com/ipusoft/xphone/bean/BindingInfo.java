@@ -1,4 +1,4 @@
-package com.ipusoft.xlibrary.bean;
+package com.ipusoft.xphone.bean;
 
 import java.io.Serializable;
 import java.util.List;

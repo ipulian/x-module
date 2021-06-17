@@ -1,4 +1,4 @@
-package com.ipusoft.xlibrary;
+package com.ipusoft.xphone;
 
 import android.content.Context;
 

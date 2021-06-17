@@ -1,4 +1,4 @@
-package com.ipusoft.xlibrary.http;
+package com.ipusoft.xphone.http;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -13,11 +13,11 @@ import com.ipusoft.context.manager.PhoneManager;
 import com.ipusoft.context.utils.GsonUtils;
 import com.ipusoft.context.utils.MD5Utils;
 import com.ipusoft.context.utils.StringUtils;
-import com.ipusoft.xlibrary.bean.BindingInfo;
-import com.ipusoft.xlibrary.constant.Constant;
-import com.ipusoft.xlibrary.constant.HttpStatus;
-import com.ipusoft.xlibrary.listener.QueryXNumberListener;
-import com.ipusoft.xlibrary.module.XService;
+import com.ipusoft.xphone.bean.BindingInfo;
+import com.ipusoft.xphone.constant.Constant;
+import com.ipusoft.xphone.constant.HttpStatus;
+import com.ipusoft.xphone.listener.QueryXNumberListener;
+import com.ipusoft.xphone.module.XService;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -92,7 +92,7 @@ public class XPhoneHttp {
      */
 
     private static void checkToken(String phone) {
-        if (StringUtils.isEmpty(IpuSoftSDK.getToken())) {
+        if (StringUtils.isEmpty(AppContext.getToken())) {
             Log.d(Constant.TAG, "checkToken: token认证失败,请尝试重新初始化SDK");
             IpuSoftSDK.reLogin(status -> {
                 if (OnSDKLoginListener.LoginStatus.SUCCESS == status) {
@@ -140,7 +140,7 @@ public class XPhoneHttp {
     }
 
     private static void checkToken(String phone, QueryXNumberListener listener) {
-        if (StringUtils.isEmpty(IpuSoftSDK.getToken())) {
+        if (StringUtils.isEmpty(AppContext.getToken())) {
             Log.d(Constant.TAG, "checkToken: token认证失败,请尝试重新初始化SDK");
             IpuSoftSDK.reLogin(status -> {
                 if (OnSDKLoginListener.LoginStatus.SUCCESS == status) {

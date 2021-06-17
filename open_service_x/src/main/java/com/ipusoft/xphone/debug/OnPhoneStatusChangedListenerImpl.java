@@ -1,4 +1,4 @@
-package com.ipusoft.xlibrary.debug;
+package com.ipusoft.xphone.debug;
 
 import com.ipusoft.context.listener.OnPhoneStateChangedListener;
 

@@ -1,7 +1,7 @@
-package com.ipusoft.xlibrary.api;
+package com.ipusoft.xphone.api;
 
-import com.ipusoft.context.http.HttpConstant;
-import com.ipusoft.xlibrary.bean.BindingInfo;
+import com.ipusoft.http.HttpConstant;
+import com.ipusoft.xphone.bean.BindingInfo;
 
 import io.reactivex.rxjava3.core.Observable;
 import okhttp3.RequestBody;
