@@ -78,7 +78,7 @@ XPhoneHttp.queryXPhone(phone, new Observer<BindingInfo>() {
 - 4.展示通话弹屏,可以参考 IpuSDK(https://github.com/ipulian/ipusdk) 中的说明。
 ## ProGuard rules
 ```pro
--keep class com.ipusoft.xlibrary.** { *;}
+-keep class com.ipusoft.xphone.** { *;}
 ```
 # License
 ```
