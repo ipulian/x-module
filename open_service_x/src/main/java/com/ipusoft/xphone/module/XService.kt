@@ -18,8 +18,7 @@ class XService {
         /**
          * 取号外呼
          */
-        fun callPhone(apiKey: String, sign: String,
-                      params: Map<String, Any>, observer: Observer<BindingInfo>) {
+        fun callPhone(apiKey: String, sign: String, params: Map<String, Any>, observer: Observer<BindingInfo>) {
             RetrofitManager.getInstance().retrofit.create(XAPIService::class.java)
                     .callPhone(apiKey, sign, RetrofitManager.getInstance().getRequestBody(params))
                     .subscribeOn(Schedulers.io())
