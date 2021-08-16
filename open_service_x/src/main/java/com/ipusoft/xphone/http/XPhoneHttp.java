@@ -4,15 +4,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.ipusoft.context.AppContext;
-import com.ipusoft.context.IActivityLifecycle;
 import com.ipusoft.context.IpuSoftSDK;
 import com.ipusoft.context.OnSDKLoginListener;
 import com.ipusoft.context.base.IObserver;
 import com.ipusoft.context.bean.AuthInfo;
 import com.ipusoft.context.manager.PhoneManager;
-import com.ipusoft.context.utils.GsonUtils;
-import com.ipusoft.context.utils.MD5Utils;
-import com.ipusoft.context.utils.StringUtils;
+import com.ipusoft.utils.GsonUtils;
+import com.ipusoft.utils.MD5Utils;
+import com.ipusoft.utils.StringUtils;
 import com.ipusoft.xphone.bean.BindingInfo;
 import com.ipusoft.xphone.constant.Constant;
 import com.ipusoft.xphone.constant.HttpStatus;
@@ -175,7 +174,7 @@ public class XPhoneHttp {
             XService.Companion.callPhone(authInfo.getKey(),
                     getSign(GsonUtils.toJson(params)), params, observer);
         } else {
-            Toast.makeText(IActivityLifecycle.getCurrentActivity(), "认证失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AppContext.getActivityContext(), "认证失败", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -212,7 +211,7 @@ public class XPhoneHttp {
                         }
                     });
         } else {
-            Toast.makeText(IActivityLifecycle.getCurrentActivity(), "认证失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AppContext.getActivityContext(), "认证失败", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -250,7 +249,7 @@ public class XPhoneHttp {
                         }
                     });
         } else {
-            Toast.makeText(IActivityLifecycle.getCurrentActivity(), "认证失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AppContext.getActivityContext(), "认证失败", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -279,7 +278,7 @@ public class XPhoneHttp {
                         }
                     });
         } else {
-            Toast.makeText(IActivityLifecycle.getCurrentActivity(), "认证失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(AppContext.getActivityContext(), "认证失败", Toast.LENGTH_SHORT).show();
         }
     }
 

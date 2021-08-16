@@ -22,7 +22,7 @@ def signature = [
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         if (isApp) {
@@ -86,7 +86,7 @@ dependencies {
         implementation project(":context:context")
         //implementation "com.github.ipulian:ipusdk:1.6.20"
     } else {
-        implementation "com.github.ipulian:ipusdk:1.6.22"
+        implementation "com.github.ipulian:ipusdk:1.6.23"
         //implementation project(":context:context")
     }
     annotationProcessor 'com.alibaba:arouter-compiler:1.5.1'

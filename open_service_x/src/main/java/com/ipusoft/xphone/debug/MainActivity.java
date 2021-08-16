@@ -3,28 +3,30 @@ package com.ipusoft.xphone.debug;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.ipusoft.context.AppContext;
-import com.ipusoft.context.BaseActivity;
 import com.ipusoft.context.IpuSoftSDK;
 import com.ipusoft.context.bean.AuthInfo;
 import com.ipusoft.context.config.Env;
 import com.ipusoft.context.manager.PhoneManager;
-import com.ipusoft.context.utils.StringUtils;
 import com.ipusoft.context.view.IpuWebViewActivity;
+import com.ipusoft.utils.StringUtils;
 import com.ipusoft.xphone.R;
 import com.ipusoft.xphone.bean.BindingInfo;
 import com.ipusoft.xphone.constant.HttpStatus;
 import com.ipusoft.xphone.databinding.ActivityMainBinding;
 import com.ipusoft.xphone.http.XPhoneHttp;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
 
@@ -33,19 +35,16 @@ public class MainActivity extends BaseActivity {
     String username = "17047151254";
 
     @Override
-    protected void initViewModel() {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-    }
-
-    @Override
-    protected void initData() {
+        initUI();
     }
 
 
     /**
      * 申请拨号权限
      */
-    @Override
     protected void initUI() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -58,16 +57,6 @@ public class MainActivity extends BaseActivity {
 
         binding.tvMsg.setText("当前运行环境：预发布");
 
-
-    }
-
-    @Override
-    protected void bindLiveData() {
-
-    }
-
-    @Override
-    protected void initRequest() {
 
     }
 
